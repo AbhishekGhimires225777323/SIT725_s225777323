@@ -8,6 +8,9 @@
   <!-- Materialize Core CSS -->
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <!-- External CSS File -->
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -36,15 +39,17 @@
             <span class="card-title">Rocky</span>
           </div>
 
-          <div class="card-content">
-            <p>
-              Rocky is an energetic young retriever pup who enjoys exploring and
-              learning new things. He's searching for a family ready for puppy fun.
-            </p>
+          <div class="card-content dog-info">
+            <div class="dog-info-inner">
+              <p class="dog-desc">
+                Rocky is an energetic young retriever pup who enjoys exploring and
+                learning new things. He's searching for a family ready for puppy fun.
+              </p>
+            </div>
           </div>
 
           <div class="card-action">
-            <a href="#adopt-rocky">Adopt Rocky</a>
+            <a class="modal-trigger" href="#adoptModal" data-dog="Rocky">Adopt Rocky</a>
           </div>
         </div>
       </article>
@@ -59,15 +64,17 @@
             <span class="card-title">Charlie</span>
           </div>
 
-          <div class="card-content">
-            <p>
-              Charlie is a calm and affectionate adult dog. He enjoys long strolls,
-              relaxing afternoons, and being close to people.
-            </p>
+          <div class="card-content dog-info">
+            <div class="dog-info-inner">
+              <p class="dog-desc">
+                Charlie is a calm and affectionate adult dog. He enjoys long strolls,
+                relaxing afternoons, and being close to people.
+              </p>
+            </div>
           </div>
 
           <div class="card-action">
-            <a href="#adopt-charlie">Adopt Charlie</a>
+            <a class="modal-trigger" href="#adoptModal" data-dog="Charlie">Adopt Charlie</a>
           </div>
         </div>
       </article>
@@ -75,9 +82,47 @@
     </div>
   </main>
 
-  <!-- JS Framework -->
-  <script
-    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js">
-  </script>
+  <!-- Adoption Modal -->
+  <div id="adoptModal" class="modal">
+    <div class="modal-content">
+      <h5>Adoption Form</h5>
+      <p id="selectedDog">You are adopting:</p>
+
+      <div class="row">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12">
+              <input id="fullname" type="text" class="validate">
+              <label for="fullname">Full Name</label>
+            </div>
+
+            <div class="input-field col s12">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+
+            <div class="input-field col s12">
+              <input id="phone" type="text" class="validate">
+              <label for="phone">Phone Number</label>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <a href="#!" class="modal-close waves-effect waves-green btn teal">Submit</a>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- Materialize JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <!-- External JS -->
+  <script src="js/index.js"></script>
+
 </body>
 </html>

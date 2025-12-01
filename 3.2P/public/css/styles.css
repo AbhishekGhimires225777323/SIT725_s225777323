@@ -1,0 +1,36 @@
+
+.dog-info {
+  display: grid;                
+  grid-template-rows: 0fr;       
+  transition: grid-template-rows 0.35s ease;
+  position: relative;
+  padding: 0;                    
+}
+
+.dog-info-inner {
+
+  padding: 0 16px 16px;          
+}
+
+.card:hover .dog-info,
+.card.expanded .dog-info {
+  grid-template-rows: 1fr;      
+}
+
+.card:hover .dog-info-inner,
+.card.expanded .dog-info-inner {
+  padding: 16px;                 
+}
+
+.dog-desc {
+  opacity: 0.6;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  margin: 0;                    
+}
+
+.card:hover .dog-desc,
+.card.expanded .dog-desc {
+  opacity: 1;
+  transform: translateY(0);
+}
