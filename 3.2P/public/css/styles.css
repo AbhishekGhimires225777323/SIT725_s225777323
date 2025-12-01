@@ -8,8 +8,8 @@
 }
 
 .dog-info-inner {
-
-  padding: 0 16px 16px;          
+  overflow: hidden;              /* ensure no content peeks when collapsed */
+  padding: 0;                    /* no padding in collapsed state */
 }
 
 .card:hover .dog-info,
@@ -19,7 +19,7 @@
 
 .card:hover .dog-info-inner,
 .card.expanded .dog-info-inner {
-  padding: 16px;                 
+  padding: 16px;                 /* add spacing only when expanded */
 }
 
 .dog-desc {
