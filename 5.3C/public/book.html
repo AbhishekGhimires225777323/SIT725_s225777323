@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Details</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        #detailsBox {
+            margin-top: 20px;
+            background: #eee;
+            padding: 20px;
+            /* width: fit-content; */
+        }
+
+        a {
+            color: #004d61;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Book Details</h2>
+    <a href="index.html">← Back to list</a>
+
+    <div id="detailsBox">Loading...</div>
+
+    <script>
+        const detailsBox = document.getElementById("detailsBox");
+
+        // Read book ID from URL
+        const params = new URLSearchParams(window.location.search);
+        const bookId = params.get("id");
+
+        async function loadBook() {
+            try {
+                const res = await fetch(`/api/books/${bookId}`);
+                console.log(res)
+                if (!res.ok) {
+                    detailsBox.textContent = "Book not found.";
+                    return;
+                }
+
+                const book = await res.json();
+
+                detailsBox.innerHTML = `
+                    <strong>Title:</strong> ${book.title}<br>
+                    <strong>Author:</strong> ${book.author}<br>
+                    <strong>Year:</strong> ${book.year}<br>
+                    <strong>Genre:</strong> ${book.genre}<br>
+                    <strong>Summary:</strong> ${book.summary}<br>
+                    <strong>Price:</strong> ${book.price.$numberDecimal} AUD
+                `;
+
+            } catch (err) {
+                console.error(err);
+                detailsBox.textContent = "Error loading book.";
+            }
+        }
+
+        loadBook();
+    </script>
+
+</body>
+</html>

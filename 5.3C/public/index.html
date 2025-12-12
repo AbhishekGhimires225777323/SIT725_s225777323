@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books Catalogue</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #getBooksBtn {
+            background-color: #004d61;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        #getBooksBtn:disabled {
+            opacity: 0.6;
+        }
+
+        #outputBox {
+            margin-top: 25px;
+            padding: 15px;
+            background: #ccc;
+            width: fit-content;
+            line-height: 1.6;
+        }
+
+        .book-item {
+            cursor: pointer;
+        }
+
+        .book-item:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Books Catalogue developed by s225777323</h1>
+
+    <p>Click the button below to get all food items from the server:</p>
+
+    <button id="getBooksBtn">Get all books</button>
+
+    <div id="outputBox"></div>
+
+    <script>
+        const btn = document.getElementById("getBooksBtn");
+        const output = document.getElementById("outputBox");
+
+        btn.addEventListener("click", async () => {
+            btn.disabled = true;
+            btn.textContent = "Loading...";
+
+            try {
+                const res = await fetch("/api/books");
+
+                if (!res.ok) {
+                    console.error("Server error:", res.status);
+                    alert("Error fetching books");
+                    return;
+                }
+
+                const books = await res.json();
+                output.innerHTML = "";
+
+                books.forEach(book => {
+                    const div = document.createElement("div");
+                    div.className = "book-item";
+                    div.textContent = `${book.title} ${book.price.$numberDecimal} AUD`;
+
+                    // 👉 On click, open new page with ID
+                    div.addEventListener("click", () => {
+                        window.location.href = `book.html?id=${book._id}`;
+                    });
+
+                    output.appendChild(div);
+                });
+
+            } catch (err) {
+                console.error("Fetch error:", err);
+                alert("Something went wrong. Check console.");
+            } finally {
+                btn.disabled = false;
+                btn.textContent = "Get all books";
+            }
+        });
+    </script>
+
+</body>
+</html>
