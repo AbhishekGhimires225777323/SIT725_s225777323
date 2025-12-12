@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Books Library</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    ul {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Books Library</h1>
+
+  <p>Click the button below to fetch all books from the server.</p>
+
+  <button id="fetchBtn">Fetch Books</button>
+
+  <ul id="books-list"></ul>
+
+  <script>
+    const btn = document.getElementById("fetchBtn");
+    const list = document.getElementById("books-list");
+
+    btn.addEventListener("click", async () => {
+      // show loading text
+      btn.disabled = true;
+      btn.textContent = "Loading...";
+
+      try {
+        const response = await fetch("/api/books");
+
+        if (!response.ok) {
+          console.log("Server returned error:", response.status);
+          return;
+        }
+
+        const books = await response.json();
+
+        // clear existing
+        list.innerHTML = "";
+
+        // render books
+        books.forEach(book => {
+          const li = document.createElement("li");
+          li.textContent = `${book.title} — ${book.author}`;
+          list.appendChild(li);
+        });
+
+      } catch (error) {
+        console.log("Fetch error:", error);
+      }
+
+      // reset button
+      btn.disabled = false;
+      btn.textContent = "Fetch Books";
+    });
+  </script>
+
+</body>
+</html>
