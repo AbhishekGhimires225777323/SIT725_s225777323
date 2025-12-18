@@ -1,0 +1,19 @@
+{
+  "name": "sit725-week6-testing",
+  "version": "1.0.0",
+  "description": "SIT725 Week 6 - Testing with Mocha and Chai",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha \"test/**/*.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^5.1.1",
+    "express": "^4.21.1",
+    "mocha": "^11.0.1",
+    "request": "^2.88.2"
+  }
+}
