@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Server Time</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 100px;
+        }
+        #time {
+            font-size: 24px;
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Server Time</h1>
+    <div id="time">Waiting for server...</div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('serverTime', (data) => {
+            document.getElementById('time').innerText = data;
+        });
+    </script>
+
+</body>
+</html>
